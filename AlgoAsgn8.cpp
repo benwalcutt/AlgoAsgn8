@@ -4,9 +4,13 @@
 
 using namespace std;
 
+// it just works better this way for me
+// less thinking really
 static int col[9] = {0,0,0,0,0,0,0,0,0};
 static int num = 8;
 static int counter = 0;
+static int search_col = 0;
+static int search_row = 0;
 
 bool promising(int i) {
 	int k;
@@ -28,15 +32,7 @@ void queens(int i) {
 	
 	if (promising(i)) {
 		if (i == 8) {
-			for (int i = 1; i <= 8; i++) {
-				cout << col[i];
-				if (col[6] == 7) {
-					//counter++;
-				}
-			}
-			
-			cout << endl;
-			if (col[6] == 7) {
+			if (col[search_col] == search_row) {
 				counter++;
 			}
 		}
@@ -50,7 +46,22 @@ void queens(int i) {
 }
 
 int main() {
+	int num_of_cases = 0;
+	int input = 0;
 	int num = 8;
-	queens(0);
-	cout << counter << endl;
+	
+	cin >> num_of_cases;
+	cin.ignore();
+	
+	while (num_of_cases-- != 0) {
+		counter = 0;
+		cin >> input;
+		cin.ignore();
+		search_col = input;
+		cin >> input;
+		cin.ignore();
+		search_row = input;
+		queens(0);
+		cout << counter << endl;
+	}
 }
